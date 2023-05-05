@@ -1,30 +1,24 @@
-def bubble_sort(lst):
+def quick_sort(arr):
     """
-    Sorts the given list using the bubble sort algorithm.
+    Sorts an array of integers using the quick sort algorithm.
 
     Args:
-        lst: List[int] - The list of integers to be sorted.
+        arr (List[int]): The array to be sorted.
 
     Returns:
-        List[int]: The sorted list of integers.
-    """
-    n = len(lst)
-    # Flag to check if any swaps were made in the previous iteration.
-    # If no swaps were made, the list is already sorted and the algorithm can exit early.
-    flag = True
-    for i in range(n):
-        for j in range(0, n-i-1):
-            if lst[j] > lst[j+1]:
-                # Swap the elements
-                lst[j], lst[j+1] = lst[j+1], lst[j]
-                # Mark that a swap has been made in this iteration
-                flag = False
-        # If no swaps were made in the current iteration, the list is already sorted.
-        if flag:
-            break
-    return lst
+        List[int]: The sorted array.
 
-if __name__ == "__main__":
-    lst = [5, 4, 3, 2, 1]
-    print(bubble_sort(lst))
+    """
+    if len(arr) < 2:
+        # Base case: an array with 0 or 1 element is already sorted
+        return arr
+    pivot = arr[0]
+    less = [i for i in arr[1:] if i <= pivot]
+    greater = [i for i in arr[1:] if i > pivot]
+    # Recursively sort the sub-arrays less and greater
+    return quick_sort(less) + [pivot] + quick_sort(greater)
+
+if __name__ == '__main__':
+    arr = [5, 3, 6, 2, 10]
+    print(quick_sort(arr))
 
